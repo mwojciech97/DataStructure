@@ -8,40 +8,70 @@ namespace LinkedLists
 {
     public class OneWayList
     {
-        private static Node head;
-        private static Node currentNode;
-        private class Node
+        private static OneWayListNode? head;
+        public OneWayListNode? First()
         {
-            public int data;
-            public Node next;
+            return head;
+        }
+        public OneWayListNode? Last()
+        {
+            return head == null ? head : head.next;
         }
         public void Print()
         {
-            Node node = head;
+            if (head == null) return;
+            OneWayListNode? node = head;
             while (node != null)
             {
                 Console.WriteLine(node.data);
                 node = node.next;
             }
         }
-        public void Push(int newData)
+        public void AddFirst(int data)
         {
-            Node node = new Node();
-            node.data = newData;
-            node.next = null;
-            if (head == null)
+            OneWayListNode node = new OneWayListNode();
+            node.data = data;
+            node.next = head;
+            head = node;
+        }
+        public void AddLast(int data)
+        {
+            OneWayListNode node = new OneWayListNode(data);
+            OneWayListNode? last_node = head;
+            if(last_node == null)
             {
                 head = node;
-                currentNode = node;
+                return;
             }
-            if (currentNode != null)
+            while(last_node.next != null)
             {
-                currentNode.next = node;
-                currentNode = node;
-            }   
+                last_node = last_node.next;
+            }
+            last_node.next = node;
+        }
+        public void AddAfter(OneWayListNode? prev_node, int data)
+        {
+            if(prev_node == null)
+            {
+                Console.WriteLine("Given node cannot be null!");
+                return;
+            }
+
+            OneWayListNode newNode = new OneWayListNode(data);
+            newNode.next = prev_node.next;
+            prev_node.next = newNode;
         }
     }
-    
- 
+    public class OneWayListNode
+    {
+        public int data;
+        public OneWayListNode? next = null;
+        public OneWayListNode() { }
+        public OneWayListNode(int newData)
+        {
+            data = newData;
+        }
+    }
+
 }
 

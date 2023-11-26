@@ -6,14 +6,17 @@ namespace DataStructure
         static void Main(string[] args)
         {
             OneWayList a = new OneWayList();
-            a.Push(5);
-            a.Push(10);
-            a.Push(15);
+            a.AddLast(5);
+            a.AddLast(10);
+            a.AddLast(15);
+            a.AddLast(20);
+            a.AddLast(25);
+            a.AddAfter(a.First(), 17);
             a.Print();
-            LinkedList<int> list = new LinkedList<int>();
-            list.AddFirst(5);
+           /* LinkedList<int> list = new LinkedList<int>();
+            list.AddLast(5);
             list.AddLast(10);
-            list.AddLast(15);
+            list.AddLast(15);*/
         }
     }
 }
