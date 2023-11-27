@@ -8,7 +8,7 @@ namespace LinkedLists
 {
     public class OneWayList<T>
     {
-        private static OneWayListNode<T>? head;
+        private OneWayListNode<T>? head;
         #region Find Nodes
         public OneWayListNode<T>? First()
         {
@@ -21,9 +21,9 @@ namespace LinkedLists
         public OneWayListNode<T>? FindFirst(T data)
         {
             OneWayListNode<T>? node = head;
-            while(node != null)
+            while (node != null)
             {
-                if (node.data.Equals(data)) return node;
+                if (node.data!.Equals(data)) return node;
                 node = node.next;
             }
             return null;
@@ -34,7 +34,7 @@ namespace LinkedLists
             OneWayListNode<T>? lastNodeWithValue = null;
             while (node != null)
             {
-                if (node.data.Equals(data)) lastNodeWithValue = node;
+                if (node.data!.Equals(data)) lastNodeWithValue = node;
                 node = node.next;
             }
             return lastNodeWithValue;
@@ -87,6 +87,63 @@ namespace LinkedLists
             prev_node.next = newNode;
         }
         #endregion
+        public int Count()
+        {
+            OneWayListNode<T>? temp = head;
+            int result = 0;
+            while(temp != null)
+            {
+                temp = temp.next;
+                result++;
+            }
+            return result;
+        }
+        public bool Contains(T value)
+        {
+            OneWayListNode<T>? temp = head;
+            while (temp != null)
+            {
+                if(temp!.data!.Equals(value)) return true;
+                temp = temp.next;
+            }
+            return false;
+        }
+        public void Reverse()
+        {
+            OneWayListNode<T>? next = null, prev = null, current = head;
+            while(current != null)
+            {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+            head = prev;
+        }
+        public void DeleteHead()
+        {
+            if(head != null) head = head.next;
+        }
+        public void DeleteLast()
+        {
+            if (head == null) return;
+            if (head.next == null)
+            {
+                DeleteHead();
+                return;
+            }
+            OneWayListNode<T>? current = head, prev = null;
+            while(current != null)
+            {
+                if (current!.next == null)
+                {
+                    prev.next = null;
+                    return;
+                }
+                prev = current;
+                current = current!.next;
+            }
+        }
     }
     public class OneWayListNode<T>
     {
