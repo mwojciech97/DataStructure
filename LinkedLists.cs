@@ -135,14 +135,26 @@ namespace LinkedLists
             OneWayListNode<T>? current = head, prev = null;
             while(current != null)
             {
-                if (current!.next == null)
+                if (current.next == null)
                 {
-                    prev.next = null;
+                    prev!.next = null;
                     return;
                 }
                 prev = current;
-                current = current!.next;
+                current = current.next;
             }
+        }
+        public OneWayList<T> DeleteNode(OneWayListNode<T> node)
+        {
+            OneWayList<T> newList = new OneWayList<T>();
+            OneWayListNode<T>? temp = head;
+            while(temp != null)
+            {
+                if (temp != node)
+                    newList.AddLast(temp.data);
+                temp = temp.next;
+            }
+            return newList;
         }
     }
     public class OneWayListNode<T>

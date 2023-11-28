@@ -11,7 +11,8 @@ namespace DataStructure
             a.AddLast(5);
             a.AddLast(6);
             a.AddLast(7);
-            a.DeleteLast();
+            a.AddLast(5);
+            a.DeleteNode(a.FindFirst(6)!);
             a.Print();
         }
     }
